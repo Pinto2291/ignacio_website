@@ -18,18 +18,23 @@
                 <a href="#technologies" class="nav-item" data-en="Technologies" data-es="Tecnologías">Technologies</a>
                 <a href="#contact" class="nav-item" data-en="Contact" data-es="Contacto">Contact</a>
             </div>
-            <div class="lang-switcher">
-                <button id="lang-btn">ES</button>
+
+            <div class="nav-right">
+                <div class="lang-switcher">
+                    <button id="lang-btn">ES</button>
+                </div>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
             </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
+
+
         </div>
     </nav>
 
-    <header class="hero-section">
+    <header id="hero" class="hero-section">
         <div class="hero-content">
             <h1 data-en="Web & AI Developer" data-es="Desarrollador Web y de IA">Web & AI Developer</h1>
             <p data-en="Building innovative solutions for the modern web." data-es="Construyendo soluciones innovadoras para la web moderna.">Building innovative solutions for the modern web.</p>
@@ -111,7 +116,7 @@
 
         <section id="animation" class="animation-section">
             <canvas id="hypercube"></canvas>
-            <p>"You dream it, I build it"</p>
+            <p data-en="You dream it, I build it" data-es="Tu lo sueñas, yo lo construyo">"You dream it, I build it"</p>
         </section>
 
         <section id="contact" class="contact-section">
@@ -130,7 +135,16 @@
         <img src="assets/images/vzla-flag.png" alt="Venezuela Flag" class="flag-icon">
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+
     <script src="assets/js/script.js"></script>
-    <script src="assets/js/animation.js"></script>
+    <script src="assets/js/animation.js"></script> 
+    
+    <script src="assets/js/hero-animation.js"></script>
+</body>
+</html>
+
 </body>
 </html>

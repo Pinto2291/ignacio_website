@@ -1,3 +1,5 @@
+/* assets/css/navbar.css */
+
 .navbar {
     background-color: #333;
     padding: 1rem;
@@ -24,6 +26,13 @@
     display: flex;
 }
 
+/* NEW STYLES FOR THE RIGHT-SIDE GROUP */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Adds space between the language button and hamburger */
+}
+
 .nav-item {
     color: #f4f4f4;
     text-decoration: none;
@@ -41,6 +50,7 @@
     color: #f4f4f4;
     padding: 0.5rem;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 .hamburger {
@@ -63,7 +73,7 @@
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 60px;
+        top: 60px; /* Adjust based on your navbar height */
         left: 0;
         background-color: #333;
     }
@@ -77,6 +87,7 @@
         text-align: center;
     }
 
+    /* The hamburger is now part of .nav-right, but this rule remains the same */
     .hamburger {
         display: block;
     }
