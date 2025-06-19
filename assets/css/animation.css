@@ -1,0 +1,31 @@
+/* assets/css/animation.css */
+
+.animation-section {
+    position: relative;
+    padding: 4rem 2rem;
+    text-align: center;
+    background-color: #1a1a1a;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#hypercube {
+    width: 200px;
+    height: 200px;
+}
+
+.animation-section p {
+    margin-top: 1.5rem;
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .animation-section p {
+        font-size: 1.4rem;
+    }
+}

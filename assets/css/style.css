@@ -1,0 +1,30 @@
+@import url('navbar.css');
+@import url('hero.css');
+@import url('about.css');
+@import url('services.css');
+@import url('portfolio.css');
+@import url('technologies.css');
+@import url('social.css');
+@import url('animation.css');
+@import url('contact.css');
+@import url('footer.css');
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #1a1a1a;
+    color: #f4f4f4;
+}
+
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}

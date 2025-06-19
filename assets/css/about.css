@@ -1,0 +1,31 @@
+/* assets/css/about.css */
+
+.about-section {
+    padding: 4rem 2rem;
+    background-color: #222;
+    text-align: center;
+}
+
+.about-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #007bff;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .about-section {
+        padding: 3rem 1rem;
+    }
+
+    .about-section h2 {
+        font-size: 2rem;
+    }
+}
