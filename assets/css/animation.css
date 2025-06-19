@@ -2,10 +2,9 @@
 
 .animation-section {
     position: relative;
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
     text-align: center;
     background-color: #1a1a1a;
-    min-height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,18 +12,18 @@
     overflow: hidden;
 }
 
-/* Default size for Desktops */
+/* Default size for Desktops (This size remains the same) */
 #hypercube {
     display: block;
     width: 100%;
-    max-width: 400px; /* The animation won't get larger than this */
-    height: 400px;     /* The default height for large screens */
-    transition: height 0.3s ease; /* Smoothly transition size changes */
+    max-width: 700px;
+    height: 500px;
+    transition: height 0.3s ease, max-width 0.3s ease;
 }
 
 .animation-section p {
-    margin-top: 1.5rem;
-    font-size: 1.8rem;
+    margin-top: 2rem;
+    font-size: 2rem;
     font-style: italic;
     color: #ccc;
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
@@ -32,33 +31,32 @@
     z-index: 5;
 }
 
-/* For Tablets and smaller devices (screen width 768px or less) */
+/* For Tablets and smaller devices (screen width 768px or less) - MADE LARGER */
 @media (max-width: 768px) {
     .animation-section {
-        padding: 3rem 1rem;
-        min-height: 350px;
+        padding: 4rem 1rem;
     }
 
     #hypercube {
-        height: 80px; /* Reduce the height for tablets */
+        height: 550px; /* Increased from 400px to be more prominent on tablets */
+    }
+
+    .animation-section p {
+        font-size: 1.6rem;
+    }
+}
+
+/* For Smartphones (screen width 480px or less) - MADE SPECIALLY LARGER */
+@media (max-width: 480px) {
+    .animation-section {
+        padding: 3rem 1rem;
+    }
+    
+    #hypercube {
+        height: 450px; /* Significantly increased from 300px for a bigger impact on phones */
     }
 
     .animation-section p {
         font-size: 1.4rem;
-    }
-}
-
-/* For Smartphones (screen width 480px or less) */
-@media (max-width: 480px) {
-    .animation-section {
-        min-height: 100px;
-    }
-    
-    #hypercube {
-        height: 25px; /* Further reduce the height for phones */
-    }
-
-    .animation-section p {
-        font-size: 1.2rem;
     }
 }
