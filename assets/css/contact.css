@@ -2,13 +2,15 @@
 
 .contact-section {
     padding: 4rem 2rem;
-    background-color: #222;
+    background-color: var(--secondary-bg-color);
     text-align: center;
+    transition: background-color 0.3s;
 }
 
 .contact-section h2 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
+    color: var(--text-color);
 }
 
 #contact-form {
@@ -24,15 +26,17 @@
     width: 100%;
     padding: 12px;
     border-radius: 5px;
-    border: 1px solid #555;
-    background-color: #333;
-    color: #f4f4f4;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
     font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 #contact-form input::placeholder,
 #contact-form textarea::placeholder {
-    color: #aaa;
+    color: var(--text-color);
+    opacity: 0.7;
 }
 
 #contact-form textarea {

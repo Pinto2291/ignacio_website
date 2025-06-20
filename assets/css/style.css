@@ -1,3 +1,6 @@
+/* assets/css/style.css */
+
+/* Import all other CSS files */
 @import url('navbar.css');
 @import url('hero.css');
 @import url('about.css');
@@ -9,15 +12,45 @@
 @import url('contact.css');
 @import url('footer.css');
 
+/* 1. DEFINE COLOR VARIABLES FOR THEMES */
+:root {
+  /* Default Dark Theme */
+  --bg-color: #1a1a1a;
+  --secondary-bg-color: #222;
+  --card-bg-color: #2c2c2c;
+  --text-color: #f4f4f4;
+  --text-color-light: #ffffff; /* For hero text etc. */
+  --primary-color: #007bff;
+  --border-color: #555;
+  --link-hover-color: #0056b3;
+  --nav-bg-color: #333;
+}
+
+body.light-theme {
+  /* Light Theme Overrides */
+  --bg-color: #f4f4f4;
+  --secondary-bg-color: #e9ecef;
+  --card-bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --text-color-light: #ffffff; /* Hero text remains white */
+  --primary-color: #007bff;
+  --border-color: #dee2e6;
+  --link-hover-color: #0056b3;
+  --nav-bg-color: #f8f9fa;
+}
+
+
+/* 2. APPLY VARIABLES TO BASE STYLES */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    background-color: #1a1a1a;
-    color: #f4f4f4;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .btn {
-    background-color: #007bff;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 20px;
     text-decoration: none;
@@ -26,5 +59,5 @@ body {
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--link-hover-color);
 }

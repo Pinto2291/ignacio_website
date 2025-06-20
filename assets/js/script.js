@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // --- Hamburger Menu ---
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
@@ -7,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         navMenu.classList.toggle('active');
     });
 
+    // --- Language Switcher ---
     const langBtn = document.getElementById('lang-btn');
     const elementsToTranslate = document.querySelectorAll('[data-en]');
 
@@ -21,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // --- Contact Form ---
     const contactForm = document.getElementById('contact-form');
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -30,4 +33,42 @@ document.addEventListener('DOMContentLoaded', function() {
         const whatsappUrl = `https://api.whatsapp.com/send?phone=YOUR_PHONE_NUMBER&text=Name:%20${fullName}%0APhone:%20${phone}%0AMessage:%20${message}`;
         window.open(whatsappUrl, '_blank');
     });
+
+    // --- NEW: Theme Switcher Logic ---
+    const themeSwitcher = document.getElementById('theme-switcher');
+    const body = document.body;
+
+    // Function to apply the saved theme on page load
+    const applyTheme = (theme) => {
+        if (theme === 'light') {
+            body.classList.add('light-theme');
+            themeSwitcher.textContent = '☀️'; // Sun icon
+        } else {
+            body.classList.remove('light-theme');
+            themeSwitcher.textContent = '🌙'; // Moon icon
+        }
+    };
+    
+    // Function to toggle the theme and save preference
+    const toggleTheme = () => {
+        const isLight = body.classList.toggle('light-theme');
+        const newTheme = isLight ? 'light' : 'dark';
+        
+        themeSwitcher.textContent = isLight ? '☀️' : '🌙';
+        localStorage.setItem('theme', newTheme);
+        
+        // --- Update Vanta.js background color live ---
+        if (window.vantaEffect) {
+            const newBgColor = isLight ? 0xf4f4f4 : 0x1a1a1a;
+            window.vantaEffect.setOptions({
+                backgroundColor: newBgColor
+            });
+        }
+    };
+
+    // Check for saved theme in localStorage when the page loads
+    const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+    applyTheme(savedTheme);
+
+    themeSwitcher.addEventListener('click', toggleTheme);
 });
