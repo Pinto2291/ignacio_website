@@ -25,7 +25,7 @@
     background-color: var(--card-bg-color);
     border-radius: 8px;
     overflow: hidden;
-    text-align: left;
+    text-align: center;
     transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
     display: flex;
     flex-direction: column;

@@ -1,0 +1,56 @@
+<!-- /projects/project2/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Application</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="https://pinto2291.github.io/ignacio_website/" class="back-btn">← Return to Portfolio</a>
+    </header>
+
+    <div class="weather-app">
+        <div class="search-container">
+            <input type="text" id="city-input" placeholder="Enter a city name...">
+            <button id="search-btn">Search</button>
+        </div>
+
+        <div id="weather-display" class="weather-display-container hidden">
+            <h2 id="city-name" class="city">--</h2>
+            <div class="main-info">
+                <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather icon" id="weather-icon" class="weather-icon">
+                <p id="temperature" class="temp">--°C</p>
+            </div>
+            <p id="description" class="description">--</p>
+            
+            <div class="details-grid">
+                <div class="detail-item">
+                    <p class="label">Humidity</p>
+                    <p id="humidity" class="value">--%</p>
+                </div>
+                <div class="detail-item">
+                    <p class="label">Wind Speed</p>
+                    <p id="wind-speed" class="value">-- m/s</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="loader" class="loader-container hidden">
+            <div class="spinner"></div>
+        </div>
+
+        <div id="error-display" class="error-container hidden">
+            <p>City not found. Please try again.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

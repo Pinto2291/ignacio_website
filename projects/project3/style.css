@@ -1,0 +1,119 @@
+/* /projects/project3/style.css */
+:root {
+    --bg-color: #1d2228;
+    --calculator-bg: #282f38;
+    --display-bg: #1d2228;
+    --key-bg: #3a424e;
+    --key-hover-bg: #4a5360;
+    --operator-key-bg: #3a5a75;
+    --operator-key-hover-bg: #4c769b;
+    --equal-key-bg: #007bff;
+    --equal-key-hover-bg: #0056b3;
+    --text-color: #f4f4f4;
+    --subtle-text-color: #a0a0a0; /* New color for secondary display */
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.main-header {
+    position: absolute;
+    top: 2rem;
+}
+
+.back-btn {
+    color: var(--equal-key-bg);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.back-btn:hover {
+    color: var(--text-color);
+}
+
+.calculator {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--calculator-bg);
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+/* NEW: Container for both displays */
+.calculator-display-container {
+    background-color: var(--display-bg);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align text to the right */
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+/* NEW: Style for the secondary display (calculation history) */
+.calculator-secondary-display {
+    min-height: 25px; /* Prevent layout shift when empty */
+    color: var(--subtle-text-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ADJUSTED: Style for the main display */
+.calculator-display {
+    color: var(--text-color);
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+.calculator-keys {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background-color: #242a31;
+}
+
+.calculator-keys button {
+    font-family: inherit;
+    font-size: 1.5rem;
+    padding: 1.5rem 0;
+    border: none;
+    background-color: var(--key-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.calculator-keys button:hover {
+    background-color: var(--key-hover-bg);
+}
+
+.calculator-keys button:active {
+    transform: scale(0.98);
+}
+
+.key--operator {
+    background-color: var(--operator-key-bg);
+}
+.key--operator:hover {
+    background-color: var(--operator-key-hover-bg);
+}
+
+.key--equal {
+    background-color: var(--equal-key-bg);
+    grid-column: -2 / -1;
+    grid-row: 2 / 6;
+}
+.key--equal:hover {
+    background-color: var(--equal-key-hover-bg);
+}

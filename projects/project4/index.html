@@ -1,0 +1,69 @@
+<!-- /projects/project4/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Product Page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="https://pinto2291.github.io/ignacio_website/" class="back-btn">← Return to Portfolio</a>
+    </header>
+
+    <div class="product-container">
+        <!-- Left Column: Image Gallery -->
+        <div class="product-gallery">
+            <div class="main-image-container">
+                <img src="https://placehold.co/600x600/2c2c2c/FFF?text=Watch+1" alt="Main product view" id="main-product-image">
+            </div>
+            <div class="thumbnail-container">
+                <img src="https://placehold.co/100x100/2c2c2c/FFF?text=Watch+1" alt="Thumbnail 1" class="thumbnail active">
+                <img src="https://placehold.co/100x100/3a3a3a/FFF?text=Watch+2" alt="Thumbnail 2" class="thumbnail">
+                <img src="https://placehold.co/100x100/4c4c4c/FFF?text=Watch+3" alt="Thumbnail 3" class="thumbnail">
+                <img src="https://placehold.co/100x100/5e5e5e/FFF?text=Watch+4" alt="Thumbnail 4" class="thumbnail">
+            </div>
+        </div>
+
+        <!-- Right Column: Product Details -->
+        <div class="product-details">
+            <h1 class="product-title">Modern Chronograph Watch</h1>
+            <div class="price-container">
+                <span class="current-price">$199.99</span>
+                <span class="original-price">$249.99</span>
+            </div>
+            <p class="product-description">A sleek and stylish chronograph watch designed for the modern individual. Features a stainless steel case, sapphire crystal glass, and a genuine leather strap.</p>
+            
+            <div class="options-group">
+                <h3 class="option-title">Color</h3>
+                <div class="color-selector">
+                    <label><input type="radio" name="color" value="black" checked> <span class="swatch black"></span></label>
+                    <label><input type="radio" name="color" value="blue"> <span class="swatch blue"></span></label>
+                    <label><input type="radio" name="color" value="silver"> <span class="swatch silver"></span></label>
+                </div>
+            </div>
+
+            <div class="actions-group">
+                <div class="quantity-selector">
+                    <button id="decrease-qty">-</button>
+                    <input type="number" id="quantity-input" value="1" min="1">
+                    <button id="increase-qty">+</button>
+                </div>
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification for "Added to Cart" -->
+    <div id="toast-notification" class="toast">
+        Product added to cart!
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
