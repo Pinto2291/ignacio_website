@@ -71,4 +71,24 @@ document.addEventListener('DOMContentLoaded', function() {
     applyTheme(savedTheme);
 
     themeSwitcher.addEventListener('click', toggleTheme);
+
+     // --- NEW: Project Loader Animation Logic ---
+    const projectLinks = document.querySelectorAll('.portfolio-grid .card a');
+    const loaderOverlay = document.getElementById('loader-overlay');
+
+    projectLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault(); // Stop the link from navigating immediately
+            
+            const destinationUrl = this.href; // Get the URL from the link
+
+            loaderOverlay.classList.add('active'); // Show the loader
+
+            // Wait for the animation to play, then navigate
+            setTimeout(() => {
+                window.open(destinationUrl, '_blank'); // Open link in a new tab
+                loaderOverlay.classList.remove('active'); // Hide loader after navigating
+            }, 1500); // 1.5 seconds delay
+        });
+    });
 });

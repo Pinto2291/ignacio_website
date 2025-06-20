@@ -1,0 +1,51 @@
+/* assets/css/loader.css */
+#loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#loader-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader-scanner {
+    width: 200px;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.loader-scanner span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    animation: scan 1.5s linear infinite;
+    box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(-10px);
+    }
+    50% {
+        transform: translateY(50px);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}

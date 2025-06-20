@@ -1,6 +1,9 @@
 /* assets/css/style.css */
 
 /* Import all other CSS files */
+/* assets/css/style.css */
+@import url('loader.css'); /* ADD THIS LINE AT THE TOP */
+/* ... all your other imports ... */
 @import url('navbar.css');
 @import url('hero.css');
 @import url('about.css');

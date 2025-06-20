@@ -1,10 +1,16 @@
 /* assets/css/about.css */
+/* Last Updated: June 19, 2025, 10:13 PM, Turmero, Aragua */
 
 .about-section {
     padding: 4rem 2rem;
     background-color: var(--secondary-bg-color);
-    text-align: center;
     transition: background-color 0.3s;
+
+    /* --- NEW: Robust Layout Properties --- */
+    display: flex;              /* Establishes a flex container */
+    flex-direction: column;     /* Stacks children vertically (h2 on top of p) */
+    align-items: center;        /* Horizontally centers the children */
+    text-align: center;         /* Ensures text inside is centered */
 }
 
 .about-section h2 {
@@ -15,10 +21,18 @@
 
 .about-content {
     max-width: 800px;
-    margin: 0 auto;
+    
+    /* --- NEW: Ensure it takes available width --- */
+    width: 100%; /* Prevents the container from shrinking unexpectedly */
+
     font-size: 1.1rem;
     line-height: 1.6;
     color: var(--text-color);
+}
+
+/* The paragraph itself inside the container */
+.about-content p {
+    margin: 0; /* Remove default paragraph margin if needed */
 }
 
 @media (max-width: 768px) {
