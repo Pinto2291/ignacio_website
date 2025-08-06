@@ -1,210 +1,777 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-en="Ignacio Pinto - Web & AI Developer" data-es="Ignacio Pinto - Desarrollador Web y IA">Ignacio Pinto - Web & AI Developer</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Ignacio Pinto - Frontend Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #111827;
+            --text-color: #E5E7EB;
+            --card-bg: #1F2937;
+            --section-bg: #111827;
+            --section-alt-bg: #1F2937;
+            --primary-color: #4F46E5;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --nav-bg: rgba(17, 24, 39, 0.8);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        #hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+        }
+
+        .hero-quadrant {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .hero-quadrant span {
+            font-size: 15vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            user-select: none;
+        }
+
+
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .nav-link {
+            position: relative;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .content-container {
+            position: relative;
+            z-index: 1;
+        }
+        .section {
+            background-color: var(--section-bg);
+        }
+        .section-alt {
+            background-color: var(--section-alt-bg);
+        }
+        .skill-tag {
+            background-color: #374151;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .skill-tag:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .project-card {
+            background-color: var(--card-bg);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        .project-card:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.2), 0 4px 6px -2px rgba(79, 70, 229, 0.1);
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        .section:hover .section-title::after {
+            width: 100%;
+        }
+        .toggle-button {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        #skill-tooltip {
+            position: fixed;
+            background-color: #374151;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            max-width: 300px;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        #skill-tooltip.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #ai-animation-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        /* Codepen text animation styles */
+        .ml1 {
+          font-weight: 900;
+          font-size: 3.5em;
+        }
+
+        .ml1 .letter {
+          display: inline-block;
+          line-height: 1em;
+        }
+
+        .ml1 .text-wrapper {
+          position: relative;
+          display: inline-block;
+          padding-top: 0.1em;
+          padding-right: 0.05em;
+          padding-bottom: 0.15em;
+        }
+
+        .ml1 .line {
+          opacity: 0;
+          position: absolute;
+          left: 0;
+          height: 3px;
+          width: 100%;
+          background-color: #fff;
+          transform-origin: 0 0;
+        }
+
+        .ml1 .line1 { top: 0; }
+        .ml1 .line2 { bottom: 0; }
+        
+        /* Sphere Animation Styles */
+        #sphere-animation-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+        }
+        .sphere-animation-container {
+            width: 580px;
+            height: 580px;
+            max-width: 90vw;
+            max-height: 90vw;
+        }
+        .sphere path {
+            fill: url(#sphereGradient);
+            stroke-width: 1px;
+            stroke: rgba(128, 128, 128, 0.35);
+            backface-visibility: hidden;
+        }
+
+    </style>
 </head>
-<body>
+<body class="antialiased">
+    <!-- Skill Tooltip -->
+    <div id="skill-tooltip"></div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">Ignacio Pinto</a>
-            <div class="nav-menu">
-                <a href="#about" class="nav-item" data-en="About" data-es="Sobre mí">About</a>
-                <a href="#services" class="nav-item" data-en="Services" data-es="Servicios">Services</a>
-                <a href="#portfolio" class="nav-item" data-en="Portfolio" data-es="Portafolio">Portfolio</a>
-                <a href="#technologies" class="nav-item" data-en="Technologies" data-es="Tecnologías">Technologies</a>
-                <a href="#contact" class="nav-item" data-en="Contact" data-es="Contacto">Contact</a>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-xl font-bold nav-link">IP</a>
+            <div class="hidden md:flex items-center gap-6">
+                 <a href="#about" class="nav-link" data-lang-en="About" data-lang-es="Sobre Mí">About</a>
+                 <a href="#story" class="nav-link" data-lang-en="Story" data-lang-es="Mi Historia">Story</a>
+                 <a href="#sphere-animation-section" class="nav-link" data-lang-en="Animation" data-lang-es="Animación">Animation</a>
+                 <a href="#skills" class="nav-link" data-lang-en="Skills" data-lang-es="Habilidades">Skills</a>
+                 <a href="#projects" class="nav-link" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
+                 <a href="#contact" class="nav-link" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
             </div>
-
-            <div class="nav-right">
-                <button id="theme-switcher" class="theme-btn">🌙</button>
-                
-                <div class="lang-switcher">
-                    <button id="lang-btn">ES</button>
-                </div>
-                <div class="hamburger">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
+            <div class="flex items-center gap-2">
+                <button id="lang-toggle" class="toggle-button text-sm font-medium py-2 px-4 rounded-full transition">ES</button>
+                <button id="mobile-menu-button" class="md:hidden toggle-button p-2 rounded-full w-10 h-10 flex items-center justify-center">
+                    <i id="mobile-menu-icon" class="fas fa-bars"></i>
+                </button>
             </div>
-
-
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4">
+            <a href="#about" class="block py-2 px-4 text-sm nav-link-mobile" data-lang-en="About" data-lang-es="Sobre Mí">About</a>
+            <a href="#story" class="block py-2 px-4 text-sm nav-link-mobile" data-lang-en="Story" data-lang-es="Mi Historia">Story</a>
+            <a href="#sphere-animation-section" class="block py-2 px-4 text-sm nav-link-mobile" data-lang-en="Animation" data-lang-es="Animación">Animation</a>
+            <a href="#skills" class="block py-2 px-4 text-sm nav-link-mobile" data-lang-en="Skills" data-lang-es="Habilidades">Skills</a>
+            <a href="#projects" class="block py-2 px-4 text-sm nav-link-mobile" data-lang-en="Projects" data-lang-es="Proyectos">Projects</a>
+            <a href="#contact" class="block py-2 px-4 text-sm nav-link-mobile" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
         </div>
     </nav>
 
-    <header id="hero" class="hero-section">
-        <div class="hero-content">
-            <h1 data-en="Web & AI Developer" data-es="Desarrollador Web y de IA">Web & AI Developer</h1>
-            <p data-en="Building innovative solutions for the modern web." data-es="Construyendo soluciones innovadoras para la web moderna.">Building innovative solutions for the modern web.</p>
-            <a href="#contact" class="btn" data-en="Get in Touch" data-es="Contáctame">Get in Touch</a>
+    <!-- Header -->
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div id="hero-background">
+            <div class="hero-quadrant"><span>HTML</span></div>
+            <div class="hero-quadrant"><span>JS</span></div>
+            <div class="hero-quadrant"><span>Express</span></div>
+            <div class="hero-quadrant"><span>AI</span></div>
+        </div>
+        <div class="content-container text-center px-4">
+            <h1 class="ml1 text-4xl md:text-6xl font-bold tracking-tight mb-4">
+              <span class="text-wrapper">
+                <span class="line line1"></span>
+                <span class="letters">Ignacio Pinto</span>
+                <span class="line line2"></span>
+              </span>
+            </h1>
+            <p class="text-lg md:text-2xl max-w-2xl mx-auto" data-lang-en="Frontend Developer | You dream it, I build it" data-lang-es="Desarrollador Frontend | Tú lo sueñas, yo lo construyo">Frontend Developer | You dream it, I build it</p>
+            <div class="mt-8 flex justify-center items-center gap-4 flex-wrap">
+                <a href="#projects" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105" data-lang-en="View My Work" data-lang-es="Ver Mi Trabajo">View My Work</a>
+                <a href="https://github.com/Pinto2291" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 flex items-center gap-2">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/ignacio-pinto-04a010172" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105 flex items-center gap-2">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
         </div>
     </header>
 
-    <main>
-        <section id="about" class="about-section">
-            <h2 data-en="About Me" data-es="Sobre Mí">About Me</h2>
-            <div class="about-content">
-                <p data-en="I'm Ignacio Pinto, a Civil Engineer from Venezuela with a passion for technology. I've transitioned into the world of web and AI development, leveraging my analytical skills to build efficient and intelligent applications. I'm a dedicated remote worker, fluent in both English and Spanish, with expertise in web development, AI integration, and data management." data-es="Soy Ignacio Pinto, un Ingeniero Civil de Venezuela con una pasión por la tecnología. He hecho la transición al mundo del desarrollo web y de IA, aprovechando mis habilidades analíticas para construir aplicaciones eficientes e inteligentes. Soy un trabajador remoto dedicado, bilingüe en inglés y español, con experiencia en desarrollo web, integración de IA y gestión de datos.">I'm Ignacio Pinto, a Civil Engineer from Venezuela with a passion for technology. I've transitioned into the world of web and AI development, leveraging my analytical skills to build efficient and intelligent applications. I'm a dedicated remote worker, fluent in both English and Spanish, with expertise in web development, AI integration, and data management.</p>
+    <main class="content-container">
+        <!-- About Section -->
+        <section id="about" class="py-20 px-4 md:px-8 section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="section-title text-3xl font-bold mb-8" data-lang-en="About Me" data-lang-es="Sobre Mí">About Me</h2>
+                <p class="text-lg leading-relaxed" data-lang-en="I'm a passionate Frontend Developer with a knack for creating beautiful, functional, and user-centered digital experiences. With a strong foundation in modern web technologies, I specialize in bringing ideas to life with clean and efficient code. I'm always eager to learn and adapt to new challenges." data-lang-es="Soy un apasionado Desarrollador Frontend con un don para crear experiencias digitales hermosas, funcionales y centradas en el usuario. Con una sólida base en tecnologías web modernas, me especializo en dar vida a las ideas con código limpio y eficiente. Siempre estoy ansioso por aprender y adaptarme a nuevos desafíos.">
+                    I'm a passionate Frontend Developer with a knack for creating beautiful, functional, and user-centered digital experiences. With a strong foundation in modern web technologies, I specialize in bringing ideas to life with clean and efficient code. I'm always eager to learn and adapt to new challenges.
+                </p>
             </div>
         </section>
 
-        <section id="services" class="services-section">
-            <h2 data-en="Services & Products" data-es="Servicios y Productos">Services & Products</h2>
-            <div class="services-container">
-                <div class="service-card">
-                    <h3 data-en="Website Design" data-es="Diseño de Sitios Web">Website Design</h3>
-                    <p data-en="Creating visually appealing and user-friendly websites." data-es="Creando sitios web visualmente atractivos y fáciles de usar.">Creating visually appealing and user-friendly websites.</p>
-                </div>
-                <div class="service-card">
-                    <h3 data-en="Landing Pages" data-es="Páginas de Aterrizaje">Landing Pages</h3>
-                    <p data-en="High-converting landing pages for your marketing campaigns." data-es="Páginas de aterrizaje de alta conversión para tus campañas de marketing.">High-converting landing pages for your marketing campaigns.</p>
-                </div>
-                <div class="service-card">
-                    <h3 data-en="E-commerce Sites" data-es="Sitios de E-commerce">E-commerce Sites</h3>
-                    <p data-en="Building robust online stores to sell your products." data-es="Construyendo tiendas en línea robustas para vender tus productos.">Building robust online stores to sell your products.</p>
-                </div>
+        <!-- My Story Section -->
+        <section id="story" class="py-20 px-4 md:px-8 section-alt section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="section-title text-3xl font-bold mb-8" data-lang-en="My Story" data-lang-es="Mi Historia">My Story</h2>
+                <p class="text-lg leading-relaxed" data-lang-en="Originally from Venezuela, I began my career as a Civil Engineer. This background gave me a unique perspective on problem-solving and project management. My passion for technology led me to transition into web development, where I've been working remotely for over 10 years, honing my skills as a developer and also providing Customer Support Representative (CSR) services. This diverse experience has shaped me into a well-rounded professional who understands both the technical and human side of digital products." data-lang-es="Originario de Venezuela, comencé mi carrera como Ingeniero Civil. Esta formación me dio una perspectiva única sobre la resolución de problemas y la gestión de proyectos. Mi pasión por la tecnología me llevó a hacer la transición al desarrollo web, donde he estado trabajando de forma remota durante más de 10 años, perfeccionando mis habilidades como desarrollador y también brindando servicios de Representante de Atención al Cliente (CSR). Esta diversa experiencia me ha convertido en un profesional completo que comprende tanto el lado técnico como el humano de los productos digitales.">
+                    Originally from Venezuela, I began my career as a Civil Engineer. This background gave me a unique perspective on problem-solving and project management. My passion for technology led me to transition into web development, where I've been working remotely for over 10 years, honing my skills as a developer and also providing Customer Support Representative (CSR) services. This diverse experience has shaped me into a well-rounded professional who understands both the technical and human side of digital products.
+                </p>
             </div>
         </section>
 
-        <section id="portfolio" class="portfolio-section">
-
-            <h2 data-en="Portfolio" data-es="Portafolio">Portfolio</h2>
-            <div class="portfolio-grid">
-
-                <div class="card">
-                    <h3 data-en="A simple to-do list application" data-es="Una simple aplicación de lista de tareas">A simple to-do list application</h3>
-                    <p data-en="A simple to-do list application." data-es="Una simple aplicación de lista de tareas.">A simple to-do list application.</p>
-                    <a href="projects/project1/index.html" target="_blank" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-                </div>
-
-                 <div class="card">
-                    <h3 data-en="Weather application" data-es="Aplicacion del clima">Weather application</h3>
-                    <p data-en="A weather application." data-es="Una aplicación del clima.">Weather application.</p>
-                    <a href="projects/project2/index.html" target="_blank" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-                </div>
-
-                <div class="card">
-            <h3 data-en="Simple Calculator" data-es="Calculadora Simple">Simple Calculator</h3>
-            <p data-en="A functional calculator built with CSS Grid and vanilla JavaScript to handle arithmetic operations." data-es="Una calculadora funcional construida con CSS Grid y JavaScript puro para manejar operaciones aritméticas.">A functional calculator built with CSS Grid and vanilla JavaScript to handle arithmetic operations.</p>
-            <a href="projects/project3/index.html" target="_blank" class="btn" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-        </div>
-
-        <div class="card">
-            <h3 data-en="E-commerce Product Page" data-es="Página de Producto E-commerce">E-commerce Product Page</h3>
-            <p data-en="A responsive product page layout for an online store. Focus on clean design and user experience." data-es="Un diseño de página de producto responsiva para una tienda en línea. Foco en un diseño limpio y experiencia de usuario.">A responsive product page layout for an online store. Focus on clean design and user experience.</p>
-            <a href="projects/project4/index.html" target="_blank" class="btn" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-        </div>
-
-        <div class="card">
-            <h3 data-en="Personal Blog Layout" data-es="Diseño de Blog Personal">Personal Blog Layout</h3>
-            <p data-en="A clean and modern layout for a personal blog, designed for readability and responsiveness on all devices." data-es="Un diseño limpio y moderno para un blog personal, diseñado para la legibilidad y la responsividad en todos los dispositivos.">A clean and modern layout for a personal blog, designed for readability and responsiveness on all devices.</p>
-            <a href="projects/project5/index.html" target="_blank" class="btn" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-        </div>
-
-        <div class="card">
-            <h3 data-en="Recipe Finder App" data-es="App Buscador de Recetas">Recipe Finder App</h3>
-            <p data-en="A dynamic web app that fetches and displays recipes from a third-party API using asynchronous JavaScript." data-es="Una aplicación web dinámica que busca y muestra recetas desde una API externa usando JavaScript asíncrono.">A dynamic web app that fetches and displays recipes from a third-party API using asynchronous JavaScript.</p>
-            <a href="projects/project6/index.html" target="_blank" class="btn" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-        </div>
-
-        <div class="card">
-            <h3 data-en="Music Player UI" data-es="Interfaz de Reproductor de Música">Music Player UI</h3>
-            <p data-en="A stylish UI for a music player, built with HTML5 Audio and custom JavaScript controls for a modern look." data-es="Una interfaz estilizada para un reproductor de música, construida con HTML5 Audio y controles personalizados de JavaScript.">A stylish UI for a music player, built with HTML5 Audio and custom JavaScript controls for a modern look.</p>
-            <a href="projects/project7/index.html" target="_blank" class="btn" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-        </div>
-
-        <div class="card">
-            <h3 data-en="Product Landing Page" data-es="Página de Aterrizaje de Producto">Product Landing Page</h3>
-            <p data-en="A compelling landing page for a fictional tech product, designed to attract and convert visitors." data-es="Una página de aterrizaje atractiva para un producto tecnológico ficticio, diseñada para atraer y convertir visitantes.">A compelling landing page for a fictional tech product, designed to attract and convert visitors.</p>
-            <a href="projects/project8/index.html" target="_blank" class="btn" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-        </div>
-
-        <div class="card">
-            <h3 data-en="Interactive Quiz App" data-es="App de Quiz Interactivo">Interactive Quiz App</h3>
-            <p data-en="A fun quiz application that tracks score and progress, built with vanilla JavaScript logic and state management." data-es="Una divertida aplicación de quiz que registra el puntaje y el progreso, construida con lógica de JavaScript puro y manejo de estado.">A fun quiz application that tracks score and progress, built with vanilla JavaScript logic and state management.</p>
-            <a href="projects/project9/index.html" target="_blank" class="btn" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-        </div>
-
-        <div class="card">
-            <h3 data-en="Social Links Page" data-es="Página de Enlaces Sociales">Social Links Page</h3>
-            <p data-en="A clone of a 'link-in-bio' page for social media. A simple, mobile-first design for easy navigation." data-es="Un clon de una página de 'enlaces en la biografía' para redes sociales. Un diseño simple y mobile-first para fácil navegación.">A clone of a 'link-in-bio' page for social media. A simple, mobile-first design for easy navigation.</p>
-            <a href="projects/project10/index.html" target="_blank" class="btn" data-en="View Project" data-es="Ver Proyecto">View Project</a>
-        </div>
-
-
-                </div>
-
+        <!-- AI Development Section -->
+        <section id="ai-dev" class="py-20 px-4 md:px-8 section relative">
+            <div id="ai-animation-bg"></div>
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <h2 class="section-title text-3xl font-bold mb-8" data-lang-en="AI-Powered Development" data-lang-es="Desarrollo con IA">AI-Powered Development</h2>
+                <p class="text-lg leading-relaxed mb-4" data-lang-en="I leverage cutting-edge AI tools like Google's Gemini to accelerate development and build smarter applications. My expertise includes using Gemini for advanced code generation, automating tasks within Google Sheets and Docs, and conducting in-depth research to drive innovative project solutions. This AI-first approach allows for rapid prototyping and the creation of truly intelligent web experiences." data-lang-es="Aprovecho herramientas de IA de vanguardia como Gemini de Google para acelerar el desarrollo y construir aplicaciones más inteligentes. Mi experiencia incluye el uso de Gemini para la generación de código avanzado, la automatización de tareas en Google Sheets y Docs, y la realización de investigaciones profundas para impulsar soluciones de proyectos innovadoras. Este enfoque de IA permite la creación rápida de prototipos y la creación de experiencias web verdaderamente inteligentes.">
+                   I leverage cutting-edge AI tools like Google's Gemini to accelerate development and build smarter applications. My expertise includes using Gemini for advanced code generation, automating tasks within Google Sheets and Docs, and conducting in-depth research to drive innovative project solutions. This AI-first approach allows for rapid prototyping and the creation of truly intelligent web experiences.
+                </p>
+            </div>
         </section>
 
-        <section id="technologies" class="technologies-section">
-            <h2 data-en="Technologies" data-es="Tecnologías">Technologies</h2>
-            <div class="tech-grid">
-                 <div class="tech-card">
-                    <h3>HTML</h3>
-                    <p data-en="Standard markup language for creating web pages." data-es="Lenguaje de marcado estándar para crear páginas web.">Standard markup language for creating web pages.</p>
-                </div>
-                 <div class="tech-card">
-                    <h3>CSS</h3>
-                    <p data-en="Styling language for designing web pages." data-es="Lenguaje de estilos para diseñar páginas web.">Styling language for designing web pages.</p>
-                </div>
-                <div class="tech-card">
-                    <h3>JavaScript</h3>
-                    <p data-en="Programming language for web interactivity." data-es="Lenguaje de programación para la interactividad web.">Programming language for web interactivity.</p>
-                </div>
-                 <div class="tech-card">
-                    <h3 data-en="AI Tools" data-es="Herramientas de IA">AI Tools</h3>
-                    <p data-en="Experience with Gemini, ChatGPT, and other AI APIs." data-es="Experiencia con Gemini, ChatGPT y otras APIs de IA.">Experience with Gemini, ChatGPT, and other AI APIs.</p>
+        <!-- Sphere Animation Section -->
+        <section id="sphere-animation-section" class="py-20 px-4 md:px-8 section-alt section">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="section-title text-3xl font-bold mb-8" data-lang-en="Interactive Sphere" data-lang-es="Esfera Interactiva">Interactive Sphere</h2>
+                <div class="sphere-animation-container">
+                    <svg class="sphere" viewBox="0 0 440 440">
+                        <defs>
+                          <linearGradient id="sphereGradient" x1="5%" x2="5%" y1="0%" y2="100%">
+                            <stop stop-color="#373734" offset="0%"/>
+                            <stop stop-color="#242423" offset="50%"/>
+                            <stop stop-color="#0D0D0C" offset="100%"/>
+                          </linearGradient>
+                        </defs>
+                        <!-- Paths for the sphere -->
+                        <path d="M361.604 361.238c-24.407 24.408-51.119 37.27-59.662 28.727-8.542-8.543 4.319-35.255 28.726-59.663 24.408-24.407 51.12-37.269 59.663-28.726 8.542 8.543-4.319 35.255-28.727 59.662z"/><path d="M360.72 360.354c-35.879 35.88-75.254 54.677-87.946 41.985-12.692-12.692 6.105-52.067 41.985-87.947 35.879-35.879 75.254-54.676 87.946-41.984 12.692 12.692-6.105 52.067-41.984 87.946z"/><path d="M357.185 356.819c-44.91 44.91-94.376 68.258-110.485 52.149-16.11-16.11 7.238-65.575 52.149-110.485 44.91-44.91 94.376-68.259 110.485-52.15 16.11 16.11-7.239 65.576-52.149 110.486z"/><path d="M350.998 350.632c-53.21 53.209-111.579 81.107-130.373 62.313-18.794-18.793 9.105-77.163 62.314-130.372 53.209-53.21 111.579-81.108 130.373-62.314 18.794 18.794-9.105 77.164-62.314 130.373z"/><path d="M343.043 342.677c-59.8 59.799-125.292 91.26-146.283 70.268-20.99-20.99 10.47-86.483 70.269-146.282 59.799-59.8 125.292-91.26 146.283-70.269 20.99 20.99-10.47 86.484-70.27 146.283z"/><path d="M334.646 334.28c-65.169 65.169-136.697 99.3-159.762 76.235-23.065-23.066 11.066-94.593 76.235-159.762s136.697-99.3 159.762-76.235c23.065 23.065-11.066 94.593-76.235 159.762z"/><path d="M324.923 324.557c-69.806 69.806-146.38 106.411-171.031 81.76-24.652-24.652 11.953-101.226 81.759-171.032 69.806-69.806 146.38-106.411 171.031-81.76 24.652 24.653-11.953 101.226-81.759 171.032z"/><path d="M312.99 312.625c-73.222 73.223-153.555 111.609-179.428 85.736-25.872-25.872 12.514-106.205 85.737-179.428s153.556-111.609 179.429-85.737c25.872 25.873-12.514 106.205-85.737 179.429z"/><path d="M300.175 299.808c-75.909 75.909-159.11 115.778-185.837 89.052-26.726-26.727 13.143-109.929 89.051-185.837 75.908-75.908 159.11-115.778 185.837-89.051 26.726 26.726-13.143 109.928-89.051 185.836z"/><path d="M284.707 284.34c-77.617 77.617-162.303 118.773-189.152 91.924-26.848-26.848 14.308-111.534 91.924-189.15C265.096 109.496 349.782 68.34 376.63 95.188c26.849 26.849-14.307 111.535-91.923 189.151z"/><path d="M269.239 267.989c-78.105 78.104-163.187 119.656-190.035 92.807-26.849-26.848 14.703-111.93 92.807-190.035 78.105-78.104 163.187-119.656 190.035-92.807 26.849 26.848-14.703 111.93-92.807 190.035z"/><path d="M252.016 250.08c-77.617 77.617-162.303 118.773-189.152 91.924-26.848-26.848 14.308-111.534 91.924-189.15C232.406 75.236 317.092 34.08 343.94 60.928c26.849 26.849-14.307 111.535-91.924 189.151z"/><path d="M234.793 232.171c-76.246 76.246-159.549 116.321-185.837 89.934-26.288-26.288 13.787-109.591 89.934-185.837C215.136 59.922 298.439 19.847 324.727 46.234c26.288 26.288-13.787 109.591-89.934 185.937z"/><path d="M216.688 213.38c-73.222 73.223-153.555 111.609-179.428 85.736-25.872-25.872 12.514-106.205 85.737-179.428s153.556-111.609 179.429-85.737c25.872 25.873-12.514 106.205-85.737 179.429z"/><path d="M198.583 194.589c-69.806 69.806-146.38 106.411-171.031 81.76-24.652-24.652 11.953-101.226 81.759-171.032 69.806-69.806 146.38-106.411 171.031-81.76 24.652 24.653-11.953 101.226-81.759 171.032z"/><path d="M179.606 174.916c-65.169 65.169-136.697 99.3-159.762 76.235-23.065-23.066 11.066-94.593 76.235-159.762s136.697-99.3 159.762-76.235c23.065 23.065-11.066 94.593-76.235 159.762z"/><path d="M160.63 155.243c-59.8 59.799-125.292 91.26-146.283 70.268-20.99-20.99 10.47-86.483 70.269-146.282 59.799-59.8 125.292-91.26 146.283-70.269 20.99 20.99-10.47 86.484-70.27 146.283z"/><path d="M140.771 134.688c-53.21 53.209-111.579 81.107-130.373 62.313-18.794-18.793 9.105-77.163 62.314-130.372 53.209-53.21 111.579-81.108 130.373-62.314 18.794 18.794-9.105 77.164-62.314 130.373z"/><path d="M120.912 114.133c-44.91 44.91-94.376 68.258-110.485 52.149-16.11-16.11 7.238-65.575 52.149-110.485 44.91-44.91 94.376-68.259 110.485-52.15 16.11 16.11-7.239 65.576-52.149 110.486z"/><path d="M100.17 92.7c-35.879 35.88-75.254 54.677-87.946 41.985-12.692-12.692 6.105-52.067 41.985-87.947s75.254-54.676 87.946-41.984c12.692 12.692-6.105 52.067-41.984 87.946z"/><path d="M79.429 71.268c-24.407 24.408-51.119 37.27-59.662 28.727-8.542-8.543 4.319-35.255 28.726-59.663 24.408-24.407 51.12-37.269 59.663-28.726 8.542 8.543-4.319 35.255-28.727 59.662z"/>
+                    </svg>
                 </div>
             </div>
         </section>
 
-        <section id="social" class="social-section">
-             <h2 data-en="Connect with Me" data-es="Conecta Conmigo">Connect with Me</h2>
-             <div class="social-links">
-                 <a href="https://www.linkedin.com/in/ignacio-pinto/" target="_blank">LinkedIn</a>
-                 <a href="https://www.instagram.com/ignaciopinto/" target="_blank">Instagram</a>
-             </div>
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 px-4 md:px-8 section">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="section-title text-3xl font-bold mb-12 text-center" data-lang-en="Skills & Tech Stack" data-lang-es="Habilidades y Tecnologías">Skills & Tech Stack</h2>
+                <div class="mb-10">
+                    <h3 class="text-xl font-semibold text-center mb-6" data-lang-en="Languages & Frameworks" data-lang-es="Lenguajes y Frameworks">Languages & Frameworks</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="HTML5" data-desc-en="The standard markup language for creating web pages and web applications. It's the backbone of any website." data-desc-es="El lenguaje de marcado estándar para crear páginas y aplicaciones web. Es la columna vertebral de cualquier sitio web.">HTML5</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="CSS3" data-desc-en="The language for describing the presentation of Web pages, including colors, layout, and fonts. It allows for rich and responsive designs." data-desc-es="El lenguaje para describir la presentación de páginas web, incluyendo colores, diseño y fuentes. Permite diseños ricos y responsivos.">CSS3</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="JavaScript" data-desc-en="A dynamic programming language that enables interactive web pages, animations, and complex features." data-desc-es="Un lenguaje de programación dinámico que permite páginas web interactivas, animaciones y características complejas.">JavaScript</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="React" data-desc-en="A JavaScript library for building user interfaces. It lets you compose complex UIs from small, isolated pieces of code called 'components'." data-desc-es="Una biblioteca de JavaScript para construir interfaces de usuario. Te permite componer UIs complejas a partir de pequeñas y aisladas piezas de código llamadas 'componentes'.">React</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Next.js" data-desc-en="A popular React framework that provides production-ready features like server-side rendering, static site generation, and optimized performance." data-desc-es="Un popular framework de React que proporciona características listas para producción como renderizado del lado del servidor, generación de sitios estáticos y rendimiento optimizado.">Next.js</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Tailwind CSS" data-desc-en="A utility-first CSS framework for rapidly building custom designs without ever leaving your HTML. It provides low-level utility classes to build any design directly in your markup." data-desc-es="Un framework CSS de 'utilidad-primero' para construir rápidamente diseños personalizados sin salir de tu HTML. Proporciona clases de utilidad de bajo nivel para construir cualquier diseño directamente en tu marcado.">Tailwind CSS</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Bootstrap" data-desc-en="A powerful, feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid systems and components, and bring projects to life with powerful JavaScript plugins." data-desc-es="Un potente kit de herramientas de frontend lleno de funciones. Construye y personaliza con Sass, utiliza sistemas de rejilla y componentes preconstruidos, y da vida a los proyectos con potentes plugins de JavaScript.">Bootstrap</span>
+                    </div>
+                </div>
+                 <div>
+                    <h3 class="text-xl font-semibold text-center mb-6" data-lang-en="Tools & Platforms" data-lang-es="Herramientas y Plataformas">Tools & Platforms</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Git & GitHub" data-desc-en="Git is a version control system for tracking changes. GitHub is a platform for hosting and collaborating on Git repositories." data-desc-es="Git es un sistema de control de versiones para rastrear cambios. GitHub es una plataforma para alojar y colaborar en repositorios de Git.">Git & GitHub</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Vite" data-desc-en="A next-generation frontend tooling that provides an extremely fast development environment and bundles your code for production." data-desc-es="Una herramienta de frontend de nueva generación que proporciona un entorno de desarrollo extremadamente rápido y empaqueta tu código para producción.">Vite</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Webpack" data-desc-en="A powerful and flexible module bundler for JavaScript applications. It takes modules with dependencies and generates static assets representing those modules." data-desc-es="Un potente y flexible empaquetador de módulos para aplicaciones JavaScript. Toma módulos con dependencias y genera activos estáticos que representan esos módulos.">Webpack</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Figma" data-desc-en="A collaborative interface design tool that allows teams to design, prototype, and gather feedback all in one place." data-desc-es="Una herramienta de diseño de interfaces colaborativa que permite a los equipos diseñar, prototipar y recopilar comentarios en un solo lugar.">Figma</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Vercel" data-desc-en="A cloud platform for static sites and Serverless Functions that enables developers to host websites and web services that deploy instantly and scale automatically." data-desc-es="Una plataforma en la nube para sitios estáticos y funciones sin servidor que permite a los desarrolladores alojar sitios web y servicios que se despliegan instantáneamente y escalan automáticamente.">Vercel</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Netlify" data-desc-en="An all-in-one platform for automating modern web projects. It provides continuous deployment from your Git repositories, serverless functions, and more." data-desc-es="Una plataforma todo en uno para automatizar proyectos web modernos. Proporciona despliegue continuo desde tus repositorios de Git, funciones sin servidor y más.">Netlify</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Resume Section -->
+        <section id="resume" class="py-20 px-4 md:px-8 section-alt section">
+            <div class="max-w-4xl mx-auto text-center">
+                 <h2 class="section-title text-3xl font-bold mb-8" data-lang-en="My Resume" data-lang-es="Mi Currículum">My Resume</h2>
+                 <p class="text-lg leading-relaxed mb-8" data-lang-en="Interested in the full details? Download my CV to get a comprehensive look at my skills, experience, and project history." data-lang-es="¿Interesado en todos los detalles? Descarga mi CV para obtener una visión completa de mis habilidades, experiencia e historial de proyectos.">Interested in the full details? Download my CV to get a comprehensive look at my skills, experience, and project history.</p>
+                 <a href="path/to/your/cv.pdf" download="IgnacioPinto-CV.pdf" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition-transform transform hover:scale-105 inline-flex items-center gap-2">
+                    <i class="fas fa-download"></i> <span data-lang-en="Download CV" data-lang-es="Descargar CV">Download CV</span>
+                 </a>
+            </div>
         </section>
 
-        <section id="animation" class="animation-section">
-            <canvas id="hypercube"></canvas>
-            <p data-en="You dream it, I build it" data-es="Tu lo sueñas, yo lo construyo">"You dream it, I build it"</p>
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 px-4 md:px-8 section">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-title text-3xl font-bold mb-12 text-center" data-lang-en="Featured Projects" data-lang-es="Proyectos Destacados">Featured Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project Card 1 -->
+                    <div class="project-card rounded-lg overflow-hidden shadow-lg">
+                        <img src="https://placehold.co/600x400/1F2937/E5E7EB?text=Project+Thumbnail" alt="E-commerce Website" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2" data-lang-en="Modern E-commerce Site" data-lang-es="Sitio E-commerce Moderno">Modern E-commerce Site</h3>
+                            <p class="mb-4" data-lang-en="A feature-rich e-commerce platform built with Next.js, Tailwind CSS, and Stripe for payments." data-lang-es="Una plataforma de e-commerce rica en funciones construida con Next.js, Tailwind CSS y Stripe para pagos.">A feature-rich e-commerce platform built with Next.js, Tailwind CSS, and Stripe for payments.</p>
+                            <div class="flex gap-4">
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 font-semibold" data-lang-en="Live Demo" data-lang-es="Demo en Vivo">Live Demo</a>
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 font-semibold" data-lang-en="Source Code" data-lang-es="Código Fuente">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div class="project-card rounded-lg overflow-hidden shadow-lg">
+                        <img src="https://placehold.co/600x400/1F2937/E5E7EB?text=Project+Thumbnail" alt="Task Management App" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2" data-lang-en="Task Management App" data-lang-es="App de Gestión de Tareas">Task Management App</h3>
+                            <p class="mb-4" data-lang-en="A responsive task management application using React and Firebase for real-time data synchronization." data-lang-es="Una aplicación de gestión de tareas responsiva usando React y Firebase para sincronización de datos en tiempo real.">A responsive task management application using React and Firebase for real-time data synchronization.</p>
+                             <div class="flex gap-4">
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 font-semibold" data-lang-en="Live Demo" data-lang-es="Demo en Vivo">Live Demo</a>
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 font-semibold" data-lang-en="Source Code" data-lang-es="Código Fuente">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div class="project-card rounded-lg overflow-hidden shadow-lg">
+                        <img src="https://placehold.co/600x400/1F2937/E5E7EB?text=Project+Thumbnail" alt="Portfolio Website" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2" data-lang-en="Developer Portfolio" data-lang-es="Portafolio de Desarrollador">Developer Portfolio</h3>
+                            <p class="mb-4" data-lang-en="A personal portfolio site to showcase my work and skills, built with modern design principles." data-lang-es="Un sitio de portafolio personal para mostrar mi trabajo y habilidades, construido con principios de diseño modernos.">A personal portfolio site to showcase my work and skills, built with modern design principles.</p>
+                             <div class="flex gap-4">
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 font-semibold" data-lang-en="Live Demo" data-lang-es="Demo en Vivo">Live Demo</a>
+                                <a href="#" class="text-indigo-400 hover:text-indigo-300 font-semibold" data-lang-en="Source Code" data-lang-es="Código Fuente">Source Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="contact" class="contact-section">
-            <h2 data-en="Contact Me" data-es="Contáctame">Contact Me</h2>
-            <form id="contact-form">
-                <input type="text" id="fullName" placeholder="Full Name" required>
-                <input type="tel" id="phone" placeholder="Phone Number" required>
-                <textarea id="message" placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn" data-en="Send via WhatsApp" data-es="Enviar por WhatsApp">Send via WhatsApp</button>
-            </form>
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 px-4 md:px-8 section-alt section">
+            <div class="max-w-xl mx-auto text-center">
+                <h2 class="section-title text-3xl font-bold mb-4" data-lang-en="Get In Touch" data-lang-es="Contáctame">Get In Touch</h2>
+                <p class="mb-8" data-lang-en="I'm currently open to new opportunities. Feel free to reach out if you have a project in mind or just want to connect!" data-lang-es="Actualmente estoy abierto a nuevas oportunidades. ¡No dudes en contactarme si tienes un proyecto en mente o simplemente quieres conectar!">I'm currently open to new opportunities. Feel free to reach out if you have a project in mind or just want to connect!</p>
+                <form id="contact-form" class="flex flex-col gap-4">
+                    <input type="text" id="name" placeholder="Your Name" class="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500" data-lang-en-placeholder="Your Name" data-lang-es-placeholder="Tu Nombre">
+                    <input type="email" id="email" placeholder="Your Email" class="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500" data-lang-en-placeholder="Your Email" data-lang-es-placeholder="Tu Email">
+                    <textarea id="message" rows="4" placeholder="Your Message" class="w-full p-3 rounded-md bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500" data-lang-en-placeholder="Your Message" data-lang-es-placeholder="Tu Mensaje"></textarea>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-transform transform hover:scale-105" data-lang-en="Send WhatsApp" data-lang-es="Enviar WhatsApp">Send WhatsApp</button>
+                </form>
+            </div>
         </section>
     </main>
 
-    <footer class="footer-section">
-        <p>&copy; 2025 Ignacio Pinto. All rights reserved.</p>
-        <img src="assets/images/vzla-flag.png" alt="Venezuela Flag" class="flag-icon">
+    <footer class="text-center py-6 border-t" style="border-color: var(--border-color); background-color: var(--section-alt-bg);">
+        <p data-lang-en="© 2025 Ignacio Pinto. All Rights Reserved." data-lang-es="© 2025 Ignacio Pinto. Todos los derechos reservados.">© 2025 Ignacio Pinto. All Rights Reserved.</p>
     </footer>
 
-    <div id="loader-overlay">
-    <div class="pulsating-loader"></div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
 
-</div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+        // --- Navbar Scroll & Mobile Menu ---
+        const navbar = document.getElementById('navbar');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+        navbar.classList.add('fixed-nav');
 
-    <script src="assets/js/script.js"></script>
-    <script src="assets/js/animation.js"></script> 
-    
-    <script src="assets/js/hero-animation.js"></script>
-</body>
-</html>
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenuIcon.classList.remove('fa-times');
+                mobileMenuIcon.classList.add('fa-bars');
+            } else {
+                mobileMenuIcon.classList.remove('fa-bars');
+                mobileMenuIcon.classList.add('fa-times');
+            }
+        });
+        
+        document.querySelectorAll('.nav-link, .nav-link-mobile').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuIcon.classList.remove('fa-times');
+                    mobileMenuIcon.classList.add('fa-bars');
+                }
+            });
+        });
 
+        // --- Hero Text Animation ---
+        function setupHeroTextAnimation() {
+            var textWrapper = document.querySelector('.ml1 .letters');
+            textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+            anime.timeline({loop: true})
+              .add({
+                targets: '.ml1 .letter',
+                scale: [0.3,1],
+                opacity: [0,1],
+                translateZ: 0,
+                easing: "easeOutExpo",
+                duration: 600,
+                delay: (el, i) => 70 * (i+1)
+              }).add({
+                targets: '.ml1 .line',
+                scaleX: [0,1],
+                opacity: [0.5,1],
+                easing: "easeOutExpo",
+                duration: 700,
+                offset: '-=875',
+                delay: (el, i, l) => 80 * (l - i)
+              }).add({
+                targets: '.ml1',
+                opacity: 0,
+                duration: 1000,
+                easing: "easeOutExpo",
+                delay: 1000
+              });
+        }
+        setupHeroTextAnimation();
+        
+        // --- Hero Background Animation ---
+        function setupHeroBgAnimation() {
+            const quadrants = document.querySelectorAll('.hero-quadrant span');
+            quadrants.forEach(quadrant => {
+                anime({
+                    targets: quadrant,
+                    scale: [1, 1.05],
+                    opacity: [0.03, 0.05],
+                    direction: 'alternate',
+                    loop: true,
+                    duration: 3000,
+                    easing: 'easeInOutSine',
+                    delay: anime.random(0, 500)
+                });
+            });
+        }
+        setupHeroBgAnimation();
+        
+        // --- AI Section Animation ---
+        function setupAiAnimation() {
+            const container = document.getElementById('ai-animation-bg');
+            if(!container) return;
+            const canvas = document.createElement('canvas');
+            container.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            let nodes = [];
+            
+            function setup() {
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+                nodes = [];
+                const nodeCount = Math.floor(canvas.width * canvas.height / 20000);
+                for(let i=0; i<nodeCount; i++) {
+                    nodes.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        vx: anime.random(-1, 1) * 0.2,
+                        vy: anime.random(-1, 1) * 0.2,
+                        radius: anime.random(1, 3)
+                    });
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(79, 70, 229, 0.5)';
+                ctx.strokeStyle = 'rgba(79, 70, 229, 0.3)';
+                
+                nodes.forEach(node => {
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    ctx.fill();
+
+                    node.x += node.vx;
+                    node.y += node.vy;
+
+                    if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                    if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                });
+
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dist = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y);
+                        if (dist < 100) {
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            ctx.lineWidth = 1 - dist / 100;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+
+            setup();
+            window.addEventListener('resize', setup);
+            draw();
+        }
+        setupAiAnimation();
+        
+        // --- Sphere Animation ---
+        function setupSphereAnimation() {
+            const sphereEl = document.querySelector('.sphere-animation-container');
+            if (!sphereEl) return;
+            
+            const spherePathEls = sphereEl.querySelectorAll('.sphere path');
+            const pathLength = spherePathEls.length;
+            let animations = [];
+
+            function fitElementToParent(el, padding) {
+                let timeout = null;
+                function resize() {
+                    if (timeout) clearTimeout(timeout);
+                    anime.set(el, {scale: 1});
+                    const pad = padding || 0;
+                    const parentEl = el.parentNode;
+                    const elOffsetWidth = el.offsetWidth - pad;
+                    const parentOffsetWidth = parentEl.offsetWidth;
+                    const ratio = parentOffsetWidth / elOffsetWidth;
+                    timeout = setTimeout(() => anime.set(el, {scale: ratio}), 10);
+                }
+                resize();
+                window.addEventListener('resize', resize);
+            }
+
+            fitElementToParent(sphereEl);
+
+            const breathAnimation = anime({
+                begin: function() {
+                    for (let i = 0; i < pathLength; i++) {
+                        animations.push(anime({
+                            targets: spherePathEls[i],
+                            stroke: {value: ['rgba(129, 140, 248, 1)', 'rgba(128,128,128,.35)'], duration: 500},
+                            translateX: [2, -4],
+                            translateY: [2, -4],
+                            easing: 'easeOutQuad',
+                            autoplay: false
+                        }));
+                    }
+                },
+                update: function(ins) {
+                    animations.forEach((animation, i) => {
+                        const percent = (1 - Math.sin((i * .35) + (.0022 * ins.currentTime))) / 2;
+                        animation.seek(animation.duration * percent);
+                    });
+                },
+                duration: Infinity,
+                autoplay: false
+            });
+
+            const introAnimation = anime.timeline({
+                autoplay: false
+            })
+            .add({
+                targets: spherePathEls,
+                strokeDashoffset: {
+                    value: [anime.setDashoffset, 0],
+                    duration: 3900,
+                    easing: 'easeInOutCirc',
+                    delay: anime.stagger(190, {direction: 'reverse'})
+                },
+                duration: 2000,
+                delay: anime.stagger(60, {direction: 'reverse'}),
+                easing: 'linear'
+            }, 0);
+
+            const shadowAnimation = anime({
+                targets: '#sphereGradient',
+                x1: '25%',
+                x2: '25%',
+                y1: '0%',
+                y2: '75%',
+                duration: 30000,
+                easing: 'easeOutQuint',
+                autoplay: false
+            }, 0);
+
+            // Use Intersection Observer to play animation only when visible
+            const sphereObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        introAnimation.play();
+                        breathAnimation.play();
+                        shadowAnimation.play();
+                        sphereObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            sphereObserver.observe(sphereEl);
+        }
+        setupSphereAnimation();
+
+        // --- Language & Skill Tooltip Logic ---
+        const langToggle = document.getElementById('lang-toggle');
+        const skillTags = document.querySelectorAll('.skill-tag');
+        const tooltip = document.getElementById('skill-tooltip');
+        let currentLang = 'en';
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'es' : 'en';
+            langToggle.textContent = currentLang === 'en' ? 'ES' : 'EN';
+            updateText();
+        });
+
+        function updateText() {
+            document.querySelectorAll('[data-lang-en]').forEach(el => {
+                const textKey = `data-lang-${currentLang}`;
+                const placeholderKey = `data-lang-${currentLang}-placeholder`;
+                if(el.hasAttribute(placeholderKey)){
+                    el.placeholder = el.getAttribute(placeholderKey);
+                } else if (el.hasAttribute(textKey)) {
+                    el.textContent = el.getAttribute(textKey);
+                }
+            });
+        }
+        
+        skillTags.forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const descKey = `desc-${currentLang}`;
+                tooltip.textContent = tag.dataset[descKey];
+                
+                const rect = tag.getBoundingClientRect();
+                tooltip.style.left = `${rect.left + rect.width / 2}px`;
+                tooltip.style.top = `${rect.bottom + 10}px`;
+                tooltip.style.transform = 'translateX(-50%)';
+                
+                // Prevent tooltip from going off-screen
+                const tooltipRect = tooltip.getBoundingClientRect();
+                if (tooltipRect.right > window.innerWidth) {
+                    tooltip.style.left = `${window.innerWidth - tooltipRect.width / 2 - 10}px`;
+                }
+                if (tooltipRect.left < 0) {
+                    tooltip.style.left = `${tooltipRect.width / 2 + 10}px`;
+                }
+
+                tooltip.classList.add('visible');
+            });
+        });
+        
+        document.addEventListener('click', () => {
+            tooltip.classList.remove('visible');
+        });
+
+        // --- Contact Form ---
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            const whatsappMessage = `Hello, my name is ${name}. My email is ${email}.%0A%0A${message}`;
+            // IMPORTANT: Replace with your actual phone number including country code
+            const whatsappUrl = `https://wa.me/YOUR_PHONE_NUMBER?text=${whatsappMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        });
+
+
+        // --- Scroll Animations for Sections ---
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: entry.target.querySelectorAll('.section-title, p, .skill-tag, .project-card, form, .download-button, .sphere-animation-container'),
+                        translateY: [20, 0],
+                        opacity: [0, 1],
+                        delay: anime.stagger(100, {start: 100}),
+                        easing: 'easeOutExpo',
+                        duration: 1000
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    });
+    </script>
 </body>
 </html>
