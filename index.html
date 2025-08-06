@@ -106,7 +106,6 @@
             background-color: #374151;
             color: white;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
         .skill-tag:hover {
             background-color: var(--primary-color);
@@ -142,23 +141,6 @@
             background-color: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(5px);
-        }
-        #skill-tooltip {
-            position: fixed;
-            background-color: #374151;
-            color: white;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            max-width: 300px;
-            z-index: 100;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        #skill-tooltip.visible {
-            opacity: 1;
-            pointer-events: auto;
         }
         #ai-animation-bg {
             position: absolute;
@@ -225,9 +207,6 @@
     </style>
 </head>
 <body class="antialiased">
-    <!-- Skill Tooltip -->
-    <div id="skill-tooltip"></div>
-
     <!-- Navbar -->
     <nav id="navbar">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
@@ -322,7 +301,7 @@
         <!-- Sphere Animation Section -->
         <section id="sphere-animation-section" class="py-20 px-4 md:px-8 section-alt section">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="section-title text-3xl font-bold mb-8" data-lang-en="Interactive Sphere" data-lang-es="Esfera Interactiva">Interactive Sphere</h2>
+                <h2 class="section-title text-3xl font-bold mb-8" data-lang-en="Make your dreams and ideas a Reality" data-lang-es="Haz tus sueños e ideas una Realidad">Make your dreams and ideas a Reality</h2>
                 <div class="sphere-animation-container">
                     <svg class="sphere" viewBox="0 0 440 440">
                         <defs>
@@ -346,24 +325,33 @@
                 <div class="mb-10">
                     <h3 class="text-xl font-semibold text-center mb-6" data-lang-en="Languages & Frameworks" data-lang-es="Lenguajes y Frameworks">Languages & Frameworks</h3>
                     <div class="flex flex-wrap justify-center gap-4">
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="HTML5" data-desc-en="The standard markup language for creating web pages and web applications. It's the backbone of any website." data-desc-es="El lenguaje de marcado estándar para crear páginas y aplicaciones web. Es la columna vertebral de cualquier sitio web.">HTML5</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="CSS3" data-desc-en="The language for describing the presentation of Web pages, including colors, layout, and fonts. It allows for rich and responsive designs." data-desc-es="El lenguaje para describir la presentación de páginas web, incluyendo colores, diseño y fuentes. Permite diseños ricos y responsivos.">CSS3</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="JavaScript" data-desc-en="A dynamic programming language that enables interactive web pages, animations, and complex features." data-desc-es="Un lenguaje de programación dinámico que permite páginas web interactivas, animaciones y características complejas.">JavaScript</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="React" data-desc-en="A JavaScript library for building user interfaces. It lets you compose complex UIs from small, isolated pieces of code called 'components'." data-desc-es="Una biblioteca de JavaScript para construir interfaces de usuario. Te permite componer UIs complejas a partir de pequeñas y aisladas piezas de código llamadas 'componentes'.">React</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Next.js" data-desc-en="A popular React framework that provides production-ready features like server-side rendering, static site generation, and optimized performance." data-desc-es="Un popular framework de React que proporciona características listas para producción como renderizado del lado del servidor, generación de sitios estáticos y rendimiento optimizado.">Next.js</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Tailwind CSS" data-desc-en="A utility-first CSS framework for rapidly building custom designs without ever leaving your HTML. It provides low-level utility classes to build any design directly in your markup." data-desc-es="Un framework CSS de 'utilidad-primero' para construir rápidamente diseños personalizados sin salir de tu HTML. Proporciona clases de utilidad de bajo nivel para construir cualquier diseño directamente en tu marcado.">Tailwind CSS</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Bootstrap" data-desc-en="A powerful, feature-packed frontend toolkit. Build and customize with Sass, utilize prebuilt grid systems and components, and bring projects to life with powerful JavaScript plugins." data-desc-es="Un potente kit de herramientas de frontend lleno de funciones. Construye y personaliza con Sass, utiliza sistemas de rejilla y componentes preconstruidos, y da vida a los proyectos con potentes plugins de JavaScript.">Bootstrap</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">HTML5</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">CSS3</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">JavaScript</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">React</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Next.js</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Tailwind CSS</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Bootstrap</span>
                     </div>
                 </div>
-                 <div>
+                 <div class="mb-10">
                     <h3 class="text-xl font-semibold text-center mb-6" data-lang-en="Tools & Platforms" data-lang-es="Herramientas y Plataformas">Tools & Platforms</h3>
                     <div class="flex flex-wrap justify-center gap-4">
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Git & GitHub" data-desc-en="Git is a version control system for tracking changes. GitHub is a platform for hosting and collaborating on Git repositories." data-desc-es="Git es un sistema de control de versiones para rastrear cambios. GitHub es una plataforma para alojar y colaborar en repositorios de Git.">Git & GitHub</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Vite" data-desc-en="A next-generation frontend tooling that provides an extremely fast development environment and bundles your code for production." data-desc-es="Una herramienta de frontend de nueva generación que proporciona un entorno de desarrollo extremadamente rápido y empaqueta tu código para producción.">Vite</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Webpack" data-desc-en="A powerful and flexible module bundler for JavaScript applications. It takes modules with dependencies and generates static assets representing those modules." data-desc-es="Un potente y flexible empaquetador de módulos para aplicaciones JavaScript. Toma módulos con dependencias y genera activos estáticos que representan esos módulos.">Webpack</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Figma" data-desc-en="A collaborative interface design tool that allows teams to design, prototype, and gather feedback all in one place." data-desc-es="Una herramienta de diseño de interfaces colaborativa que permite a los equipos diseñar, prototipar y recopilar comentarios en un solo lugar.">Figma</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Vercel" data-desc-en="A cloud platform for static sites and Serverless Functions that enables developers to host websites and web services that deploy instantly and scale automatically." data-desc-es="Una plataforma en la nube para sitios estáticos y funciones sin servidor que permite a los desarrolladores alojar sitios web y servicios que se despliegan instantáneamente y escalan automáticamente.">Vercel</span>
-                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full" data-skill="Netlify" data-desc-en="An all-in-one platform for automating modern web projects. It provides continuous deployment from your Git repositories, serverless functions, and more." data-desc-es="Una plataforma todo en uno para automatizar proyectos web modernos. Proporciona despliegue continuo desde tus repositorios de Git, funciones sin servidor y más.">Netlify</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Git & GitHub</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Vite</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Webpack</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Figma</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Vercel</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Netlify</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-center mb-6" data-lang-en="Software and AI" data-lang-es="Software e IA">Software and AI</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">VS Code</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Gemini</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">ChatGPT</span>
+                        <span class="skill-tag text-lg font-medium py-2 px-5 rounded-full">Capcut</span>
                     </div>
                 </div>
             </div>
@@ -684,8 +672,6 @@
 
         // --- Language & Skill Tooltip Logic ---
         const langToggle = document.getElementById('lang-toggle');
-        const skillTags = document.querySelectorAll('.skill-tag');
-        const tooltip = document.getElementById('skill-tooltip');
         let currentLang = 'en';
 
         langToggle.addEventListener('click', () => {
@@ -706,34 +692,6 @@
             });
         }
         
-        skillTags.forEach(tag => {
-            tag.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const descKey = `desc-${currentLang}`;
-                tooltip.textContent = tag.dataset[descKey];
-                
-                const rect = tag.getBoundingClientRect();
-                tooltip.style.left = `${rect.left + rect.width / 2}px`;
-                tooltip.style.top = `${rect.bottom + 10}px`;
-                tooltip.style.transform = 'translateX(-50%)';
-                
-                // Prevent tooltip from going off-screen
-                const tooltipRect = tooltip.getBoundingClientRect();
-                if (tooltipRect.right > window.innerWidth) {
-                    tooltip.style.left = `${window.innerWidth - tooltipRect.width / 2 - 10}px`;
-                }
-                if (tooltipRect.left < 0) {
-                    tooltip.style.left = `${tooltipRect.width / 2 + 10}px`;
-                }
-
-                tooltip.classList.add('visible');
-            });
-        });
-        
-        document.addEventListener('click', () => {
-            tooltip.classList.remove('visible');
-        });
-
         // --- Contact Form ---
         const contactForm = document.getElementById('contact-form');
         contactForm.addEventListener('submit', function(e) {
@@ -747,29 +705,6 @@
             const whatsappUrl = `https://wa.me/YOUR_PHONE_NUMBER?text=${whatsappMessage}`;
             
             window.open(whatsappUrl, '_blank');
-        });
-
-
-        // --- Scroll Animations for Sections ---
-        const sections = document.querySelectorAll('.section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    anime({
-                        targets: entry.target.querySelectorAll('.section-title, p, .skill-tag, .project-card, form, .download-button, .sphere-animation-container'),
-                        translateY: [20, 0],
-                        opacity: [0, 1],
-                        delay: anime.stagger(100, {start: 100}),
-                        easing: 'easeOutExpo',
-                        duration: 1000
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        sections.forEach(section => {
-            observer.observe(section);
         });
     });
     </script>
